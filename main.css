@@ -119,8 +119,8 @@ header {
 .main-container {
     display: flex;
     margin-top: 80px; /* Compense le header fixe */
-    height: calc(100vh - 80px); /* Ajuste la hauteur pour l'écran visible */
-    padding: 10px;
+    height: calc(75vh - 80px); /* Ajuste la hauteur pour l'écran visible */
+    padding-top: 10px;
     gap: 20px;
 }
 
@@ -260,6 +260,7 @@ body.dark-mode .flexbox-container {
 
 /* Bulle Nouveauté */
 .bulle-nouveaute {
+    margin-top: -50px;
     width: 300px; /* Largeur */
     height: 80px; /* Hauteur */
     background: linear-gradient(135deg, #6b73ff, #9ddcdc); /* Couleurs modernes */
@@ -282,13 +283,13 @@ body.dark-mode .flexbox-container {
 /* Animation pour la bulle */
 @keyframes bulle-mouvement {
     0% {
-        transform: translateX(-20%);
+        transform: translateX(10%);
     }
     50% {
         transform: translateX(20%);
     }
     100% {
-        transform: translateX(-20%);
+        transform: translateX(10%);
     }
 }
 
