@@ -1,0 +1,316 @@
+/* Général */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    box-sizing: border-box;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Mode sombre */
+body.dark-mode {
+    background-color: #1e1e2f;
+    color: #dcdcdc;
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #1e1e2f;
+    color: white;
+    border-bottom: 2px solid #444;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+/* Profil */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.profile-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+/* Barre de recherche */
+.search-bar {
+    display: flex;
+    align-items: center;
+    width: 40%;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+.search-bar button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+/* Actions à droite */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#language-select {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #333;
+    color: white;
+}
+
+.dark-mode-toggle {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+}
+
+/* Panier */
+.cart {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.cart span {
+    margin-left: 5px;
+    background-color: #ff4d4f;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 14px;
+    color: white;
+}
+
+/* Contenu principal */
+.main-container {
+    display: flex;
+    margin-top: 80px; /* Compense le header fixe */
+    height: calc(100vh - 80px); /* Ajuste la hauteur pour l'écran visible */
+    padding: 10px;
+    gap: 20px;
+}
+
+/* Alignement et flexibilité */
+.articles {
+    display: flex; /* Passe en flexbox */
+    flex-direction: column; /* Aligne les boutons en colonne */
+    justify-content: center; /* Centre les boutons verticalement */
+    align-items: center; /* Centre les boutons horizontalement */
+    width: 25%; /* Doit correspondre au logo */
+    height: 55vh; /* Utilise toute la hauteur de la fenêtre */
+    background-color: #2e2e40;
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 15px; /* Espace entre les boutons */
+}
+
+/* Media Queries pour petits écrans */
+@media (max-width: 768px) {
+    .article-button {
+        width: 90%; /* Réduit la largeur des boutons sur des écrans moyens */
+    }
+
+    .articles {
+        padding: 10px; /* Réduit le padding du conteneur */
+    }
+}
+
+@media (max-width: 480px) {
+    .article-button {
+        width: 100%; /* Les boutons occupent toute la largeur */
+        font-size: 14px; /* Réduit légèrement la taille de la police */
+    }
+
+    .articles {
+        padding: 5px; /* Réduction supplémentaire du padding */
+        gap: 10px; /* Réduit l'espacement entre les boutons */
+    }
+}
+
+/* Flexbox container */
+.flexbox-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%; /* Le reste de l'espace disponible */
+    height: 100%; /* Ajuste la hauteur pour être identique */
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.article-button {
+    padding: 10px; /* Ajuste le padding pour mieux gérer les petits écrans */
+    font-size: 16px; /* Taille de police adaptée */
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    transition: background-color 0.3s;
+    max-width: 100%; /* Empêche de dépasser le conteneur */
+    box-sizing: border-box; /* Inclut les bordures et le padding */
+    width: 100%;
+}
+
+/* Effet sur hover */
+.article-button:hover {
+    background-color: #0056b3;
+}
+/* Flexbox container */
+.flexbox-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Utilise toute la largeur */
+    height: 55vh; /* Utilise toute la hauteur de la fenêtre */
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+/* Logo doit prendre TOUTE la place */
+.logo {
+    width: 75%;
+    height: 100%;
+    object-fit: cover; /* Fait en sorte que l'image couvre complètement le conteneur */
+}
+
+/* Ajout de Media Queries pour s'assurer que l'image reste bien ajustée */
+@media (max-width: 768px) {
+    .logo {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        max-width: 95%;
+    }
+}
+
+/* Dark mode effect sur le mode sombre */
+body.dark-mode #logo {
+    content: url('image/grand-logo-sombre.jpg');
+}
+
+/* Bouton pour le basculement */
+#toggle-dark-mode {
+    padding: 10px 20px;
+    margin: 10px auto;
+    border: none;
+    background-color: #333;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#toggle-dark-mode:hover {
+    background-color: #555;
+}
+
+/* Mode sombre pour les composants */
+body.dark-mode header {
+    background-color: #333;
+}
+
+body.dark-mode .articles {
+    background-color: #444;
+}
+
+body.dark-mode .flexbox-container {
+    background-color: #000000;
+    border-color: #555;
+}
+
+/* Bulle Nouveauté */
+.bulle-nouveaute {
+    width: 300px; /* Largeur */
+    height: 80px; /* Hauteur */
+    background: linear-gradient(135deg, #6b73ff, #9ddcdc); /* Couleurs modernes */
+    border-radius: 40px; /* Forme ovale */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: bulle-mouvement 5s infinite ease-in-out;
+}
+
+/* Texte Nouveauté */
+.bulle-nouveaute span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Animation pour la bulle */
+@keyframes bulle-mouvement {
+    0% {
+        transform: translateX(-20%);
+    }
+    50% {
+        transform: translateX(20%);
+    }
+    100% {
+        transform: translateX(-20%);
+    }
+}
+
+/* Mode sombre pour la bulle */
+body.dark-mode .bulle-nouveaute {
+    background: linear-gradient(135deg, #444, #777); /* Couleurs adaptées au mode sombre */
+}
+
+/* Media Queries pour petits écrans */
+@media (max-width: 768px) {
+    .article-button {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .article-button {
+        width: 100%;
+        font-size: 14px;
+    }
+    .bulle-nouveaute {
+        width: 250px;
+        height: 70px;
+    }
+}

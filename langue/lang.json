@@ -1,0 +1,28 @@
+{
+ "fr": {
+        "title": "Bienvenue dans mon projet",
+        "description": "Ce texte est chargé depuis un fichier JSON en français.",
+        "articles": [
+            { "id": 1, "name": "Article 1" },
+            { "id": 2, "name": "Article 2" },
+            { "id": 3, "name": "Article 3" },
+            { "id": 4, "name": "Article 4" },
+            { "id": 5, "name": "Article 5" },
+            { "id": 6, "name": "Article 6" },
+            { "id": 7, "name": "Article 7" }
+        ]
+    },
+    "en": {
+        "title": "Welcome to my project",
+        "description": "This text is loaded from a JSON file in English.",
+        "articles": [
+            { "id": 1, "name": "Article 1" },
+            { "id": 2, "name": "Article 2" },
+            { "id": 3, "name": "Article 3" },
+            { "id": 4, "name": "Article 4" },
+            { "id": 5, "name": "Article 5" },
+            { "id": 6, "name": "Article 6" },
+            { "id": 7, "name": "Article 7" }
+        ]
+    }
+}

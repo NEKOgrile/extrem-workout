@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Layout</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="user-profile">
+            <img src="image/logo.jpg" alt="Profil" class="profile-img">
+        </div>
+
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Rechercher...">
+            <button id="search-button">🔍</button>
+        </div>
+
+        <div class="header-actions">
+            <select id="language-select">
+                <option value="fr">Français</option>
+                <option value="en">English</option>
+            </select>
+            <button id="toggle-dark-mode" class="dark-mode-toggle">Mode Sombre</button>
+            <div class="cart">
+                🛒 <span id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Articles Section -->
+        <div class="articles">
+            <!-- Les boutons seront ajoutés dynamiquement ici -->
+        </div>
+    
+        <!-- Flexbox Section -->
+        <div class="flexbox-container">
+            <img src="image/grand-logo.jpg" alt="Logo par défaut" class="logo" id="logo">
+        </div>
+    </div>
+    <!-- Section Nouveauté -->
+<div class="nouveaute-container">
+    <div class="bulle-nouveaute">
+        <span class="texte-nouveaute">Nouveauté</span>
+    </div>
+</div>
+
+        
+
+          <script src="main.js"></script>
+
+</body>
+</html>
