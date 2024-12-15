@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histoire de l'Entreprise</title>
+    <link rel="stylesheet" href="histoire.css">
+</head>
+<body>
+  <!-- Conteneur principal -->
+  <div class="container">
+    <div class="story-card">
+      <h1 id="histoire-titre">Chargement...</h1>
+      <p id="histoire-texte">Chargement...</p>
+    </div>
+  </div>
+
+  <!-- Script pour charger dynamiquement le contenu JSON -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('../langue/lang.json')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Erreur : ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data.fr && data.fr.histoire) {
+            document.getElementById('histoire-titre').textContent = data.fr.histoire.titre;
+            document.getElementById('histoire-texte').textContent = data.fr.histoire.texte;
+          } else {
+            console.error('Données d\'histoire non trouvées');
+          }
+        })
+        .catch(error => console.error('Erreur lors du chargement de l\'histoire :', error));
+    });
+  </script>
+</body>
+</html>

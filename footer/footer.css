@@ -149,3 +149,110 @@
     height: auto;
     object-fit: cover;
 }
+
+/* Conteneur noir - effet de superposition */
+.container-black {
+    display:none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Couvrir tout l'écran */
+    background-color: rgba(0, 0, 0, 0.7); /* Fond noir semi-transparent */
+    z-index: 1000; /* En dessous de la carte */
+    pointer-events: none; /* Permet d'interagir avec les autres éléments */
+  }
+  
+  .container-black.active {
+    display:block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Couvrir tout l'écran */
+    background-color: rgba(0, 0, 0, 0.7); /* Fond noir semi-transparent */
+    z-index: 1000; /* En dessous de la carte */
+    pointer-events: none; /* Permet d'interagir avec les autres éléments */
+  }
+
+
+  /* Carte centrale toujours centrée même avec le scroll */
+  .story-card {
+    display: none;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    max-width: 800px;
+    width: 90%;
+    text-align: justify;
+    line-height: 1.6;
+    transition: transform 0.2s ease;
+  
+    /* Centre la carte dans l'écran */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    /* Permet de s'assurer qu'elle est toujours au-dessus */
+    z-index: 10001;
+  }
+  
+
+  .story-card.active {
+    display: block;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    max-width: 800px;
+    width: 90%;
+    text-align: justify;
+    line-height: 1.6;
+    transition: transform 0.2s ease;
+  
+    /* Centre la carte dans l'écran */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    /* Permet de s'assurer qu'elle est toujours au-dessus */
+    z-index: 10001;
+  }
+  /* Ajout d'une légère animation */
+  .story-card:hover {
+    transform: translate(-50%, -50%) translateY(-5px);
+  }
+  
+  /* Titre */
+  .story-card h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Texte principal */
+  .story-card p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+    padding: 0 5px;
+  }
+  
+  /* Responsivité pour s'adapter à différents appareils */
+  @media (max-width: 768px) {
+    .story-card {
+      padding: 20px;
+    }
+  
+    .story-card h1 {
+      font-size: 22px;
+    }
+  
+    .story-card p {
+      font-size: 14px;
+    }
+  }

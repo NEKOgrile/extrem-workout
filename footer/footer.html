@@ -1,14 +1,23 @@
 <link rel="stylesheet" href="footer/footer.css">
 
+<!-- Conteneur Noir au-dessus de tout sauf de l'histoire -->
+<div class="container-black"></div>
+
+<!-- Footer dynamique -->
 <footer class="footer" id="footer">
     <!-- Le contenu sera chargé dynamiquement via JavaScript -->
-  </footer>
-  <div class="footer-bottom">
-    <span>© 2024</span>
-    <div class="user-profile-footer">
-      <img src="image/logo.jpg" alt="Profil" class="profile-img">
-    </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2024</span>
+  <div class="user-profile-footer">
+    <img src="image/logo.jpg" alt="Profil" class="profile-img" id="open-story">
   </div>
+</div>
 
-  
-  <script src="footer/footer.js"></script>
+<!-- Section pour l'affichage de l'histoire -->
+<div class="container">
+  <div class="story-card">
+    <h1 id="histoire-titre">Chargement...</h1>
+    <p id="histoire-texte">Chargement...</p>
+  </div>
+</div>

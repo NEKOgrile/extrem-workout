@@ -1,0 +1,65 @@
+/* Général */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #f4f4f9, #dce1e8);
+  }
+  
+  /* Conteneur principal */
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 10px;
+  }
+  
+  /* Carte centrale */
+  .story-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    max-width: 800px;
+    width: 100%;
+    text-align: justify;
+    line-height: 1.6;
+    transition: transform 0.2s ease;
+  }
+  
+  /* Ajout d'une légère animation */
+  .story-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Titre */
+  .story-card h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Texte principal */
+  .story-card p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+    padding: 0 5px;
+  }
+  
+  /* Pour une meilleure lisibilité */
+  @media (max-width: 768px) {
+    .story-card {
+      padding: 20px;
+    }
+  
+    .story-card h1 {
+      font-size: 22px;
+    }
+  
+    .story-card p {
+      font-size: 14px;
+    }
+  }

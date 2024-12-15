@@ -1,6 +1,10 @@
 {
     "fr": {
         "title": "Bienvenue dans mon projet",
+        "histoire": {
+      "titre": "L'Histoire de Notre Entreprise",
+      "texte": "Notre entreprise a été fondée dans les années 1990 avec pour mission de repousser les limites de l'innovation dans le domaine de la technologie. Depuis ses débuts modestes dans un petit garage jusqu'à devenir l'une des sociétés leaders du secteur, notre parcours est marqué par des défis, des succès et une passion constante pour l'excellence.\n\nNous avons démarré avec un objectif clair : offrir des solutions accessibles et durables pour nos clients. Notre équipe, composée de talents passionnés et déterminés, a contribué à cette aventure avec des valeurs solides : intégrité, innovation et collaboration.\n\nAujourd'hui, notre histoire continue d'écrire de nouvelles pages avec des produits qui transforment la manière dont les gens interagissent avec la technologie. Grâce à nos clients fidèles et nos équipes inspirées, nous avançons vers un avenir prometteur, où chaque défi est une opportunité de créer, d'apprendre et d'évoluer."
+    },
         "description": "Ce texte est chargé depuis un fichier JSON en français.",
         "articles": [
             { "id": 1, "name": "Article 1" },
@@ -58,6 +62,13 @@
     },
     "en": {
         "title": "Welcome to my project",
+        
+  "histoire": {
+    "titre": "The Story of Our Company",
+    "texte": "Our company was founded in the 1990s with the mission to push the boundaries of innovation in the field of technology. From our modest beginnings in a small garage to becoming one of the leading companies in the industry, our journey has been marked by challenges, successes, and a constant passion for excellence.\n\nWe started with a clear goal: to provide accessible and sustainable solutions for our clients. Our team, made up of passionate and determined talents, has contributed to this journey with strong values: integrity, innovation, and collaboration.\n\nToday, our story continues to write new chapters with products that are transforming the way people interact with technology. Thanks to our loyal customers and inspired teams, we are advancing toward a promising future, where every challenge is an opportunity to create, learn, and grow."
+  },
+
+
         "description": "This text is loaded from a JSON file in English.",
         "articles": [
             { "id": 1, "name": "Article 1" },

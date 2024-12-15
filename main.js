@@ -6,6 +6,8 @@ const bodyElement = document.body; // Référence au body
 const logoElement = document.getElementById('logo'); // Référence au logo
 const toggleDarkModeBtn = document.getElementById('toggle-dark-mode'); // Bouton mode sombre
 const languageSelect = document.getElementById('language-select'); // Sélecteur de langue
+const boutonHistoire = document.getElementById('open-story'); // bouton dans le footer
+
 
 // === Fonctions ===
 
@@ -70,7 +72,8 @@ languageSelect.addEventListener('change', (event) => {
     loadArticles(event.target.value);
     loadFooter(event.target.value);
 
-
+    
+   
 });
 
 // Gestion de la recherche
@@ -118,60 +121,151 @@ function loadArticles(lang) {
 loadArticles('fr');
 
 function loadFooter(lang) {
+    // Chargement dynamique du contenu HTML du footer
     fetch('footer/footer.html')
-    .then(response => response.text())
-    .then(html => {
-      document.getElementById('footer-container').innerHTML = html;
-    })
-    .catch(error => {
-      console.error('Erreur lors du chargement du footer:', error);
-    });
-
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('footer-container').innerHTML = html;
+  
+        // Une fois le footer chargé, attache l'écouteur pour le bouton
+        attachFooterEvents();
+      })
+      .catch(error => {
+        console.error('Erreur lors du chargement du footer:', error);
+      });
+  
+    // Chargement des données depuis le JSON pour la langue spécifiée
     fetch('./langue/lang.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Erreur HTTP ! statut : ${response.status}`);
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Erreur HTTP ! statut : ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data[lang] && data[lang].footer) {
+          const footerContainer = document.getElementById('footer');
+          footerContainer.innerHTML = ''; // Vide le contenu du footer avant de le remplir dynamiquement
+  
+          // Parcourir chaque section du footer selon le JSON
+          data[lang].footer.sections.forEach(section => {
+            const sectionDiv = document.createElement('div');
+            sectionDiv.classList.add('footer-section');
+  
+            // Ajout du titre
+            const sectionTitle = document.createElement('h4');
+            sectionTitle.textContent = section.title;
+            sectionDiv.appendChild(sectionTitle);
+  
+            // Ajout de la liste avec les liens
+            const linkList = document.createElement('ul');
+            section.links.forEach(link => {
+              const listItem = document.createElement('li');
+              const anchor = document.createElement('a');
+              anchor.href = link.url;
+              anchor.textContent = link.name;
+              listItem.appendChild(anchor);
+              linkList.appendChild(listItem);
+            });
+            sectionDiv.appendChild(linkList);
+  
+            footerContainer.appendChild(sectionDiv);
+          });
+        } else {
+          console.error('Aucune section de footer trouvée pour cette langue.');
+        }
+      })
+      .catch(error => {
+        console.error('Erreur lors du chargement des données du footer:', error);
+      });
+  }
+  
+  // Attache les événements après le chargement dynamique du footer
+  function attachFooterEvents() {
+    const boutonHistoire = document.getElementById('open-story');
+    if (boutonHistoire) {
+      boutonHistoire.addEventListener('click', openStory);
+    }
+  }
+  
+  // Fonction pour afficher l'histoire lorsqu'on clique sur le bouton
+  function openStory() {
+    console.log("Bouton cliqué, histoire ouverte !");
+    
+    const storyContainer = document.getElementById('story-container');
+    if (storyContainer) {
+      storyContainer.style.display = 'flex';
+    }
+  }
+  
+  // Initialiser le footer avec la langue par défaut
+  loadFooter('fr');
+  function histoire(lang) {
+    fetch('./langue/lang.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Erreur : ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Vérifier si les données existent dans le JSON
+        if (data[lang] && data[lang].histoire) {
+          // Mettre à jour le titre et le texte de l'histoire
+          document.getElementById('histoire-titre').textContent = data[lang].histoire.titre;
+          document.getElementById('histoire-texte').textContent = data[lang].histoire.texte;
+        } else {
+          console.error('Données d\'histoire non trouvées');
+        }
+      })
+      .catch(error => console.error('Erreur lors du chargement de l\'histoire :', error));
+  }
+  
+  histoire('fr');
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    function waitForElement(selector, callback) {
+      const interval = setInterval(() => {
+        const element = document.querySelector(selector);
+        if (element) {
+          clearInterval(interval);
+          callback(element);
+        }
+      }, 100); // Vérifie toutes les 100ms
+    }
+  
+    waitForElement('#open-story', (storyButton) => {
+      waitForElement('.container-black', (containerBlack) => {
+        waitForElement('.story-card', (storyCard) => {
+          // Afficher la story quand on clique sur le bouton
+          storyButton.addEventListener('click', function (e) {
+            containerBlack.classList.add('active');
+            storyCard.classList.add('active');
+            e.stopPropagation(); // Empêche que l'événement se propage
+          });
+  
+          // Fermer la story en cliquant sur la superposition
+          containerBlack.addEventListener('click', function (e) {
+            containerBlack.classList.remove('active');
+            storyCard.classList.remove('active');
+          });
+  
+          // Fermer la story en cliquant en dehors de la carte
+          document.addEventListener('click', function (e) {
+            if (
+              storyCard.classList.contains('active') &&
+              !storyCard.contains(e.target) &&
+              !storyButton.contains(e.target)
+            ) {
+              containerBlack.classList.remove('active');
+              storyCard.classList.remove('active');
             }
-            return response.json();
-        })
-        .then(data => {
-            if (data[lang] && data[lang].footer) {
-                const footerContainer = document.getElementById('footer');
-                footerContainer.innerHTML = ''; // Vide le contenu du footer
-                
-                // Parcourt chaque section du footer définie dans le JSON
-                data[lang].footer.sections.forEach(section => {
-                    const sectionDiv = document.createElement('div');
-                    sectionDiv.classList.add('footer-section');
-                    
-                    // Ajoute le titre de la section
-                    const sectionTitle = document.createElement('h4');
-                    sectionTitle.textContent = section.title;
-                    sectionDiv.appendChild(sectionTitle);
-                    
-                    // Ajoute la liste des liens de la section
-                    const linkList = document.createElement('ul');
-                    section.links.forEach(link => {
-                        const listItem = document.createElement('li');
-                        const anchor = document.createElement('a');
-                        anchor.href = link.url;
-                        anchor.textContent = link.name;
-                        listItem.appendChild(anchor);
-                        linkList.appendChild(listItem);
-                    });
-                    sectionDiv.appendChild(linkList);
-                    footerContainer.appendChild(sectionDiv);
-                });
-            } else {
-                console.error('Aucune section de footer trouvée pour cette langue.');
-            }
-        })
-        .catch(error => {
-            console.error('Erreur lors du chargement des données du footer:', error);
+          });
         });
-}
+      });
+    });
+  });
+  
 
-// Initialiser le footer avec la langue par défaut
-loadFooter('fr');
-
-
+  
