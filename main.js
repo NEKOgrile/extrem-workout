@@ -68,6 +68,8 @@ toggleDarkModeBtn.addEventListener('click', toggleDarkMode);
 languageSelect.addEventListener('change', (event) => {
     setLanguage(event.target.value);
     loadArticles(event.target.value);
+    loadFooter(event.target.value);
+
 
 });
 
@@ -81,7 +83,6 @@ document.querySelector('.cart').addEventListener('click', addToCart);
 setLanguage('fr'); // Langue par défaut
 // Fonction pour charger les articles depuis le fichier JSON
 function loadArticles(lang) {
-    console.log('test')
     fetch('./langue/lang.json')
         .then(response => {
             if (!response.ok) {
@@ -115,5 +116,50 @@ function loadArticles(lang) {
 
 // Initialiser les articles avec la langue par défaut
 loadArticles('fr');
+function loadFooter(lang) {
+    fetch('./langue/lang.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP ! statut : ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data[lang] && data[lang].footer) {
+                const footerContainer = document.getElementById('footer');
+                footerContainer.innerHTML = ''; // Vide le contenu du footer
+                
+                // Parcourt chaque section du footer définie dans le JSON
+                data[lang].footer.sections.forEach(section => {
+                    const sectionDiv = document.createElement('div');
+                    sectionDiv.classList.add('footer-section');
+                    
+                    // Ajoute le titre de la section
+                    const sectionTitle = document.createElement('h4');
+                    sectionTitle.textContent = section.title;
+                    sectionDiv.appendChild(sectionTitle);
+                    
+                    // Ajoute la liste des liens de la section
+                    const linkList = document.createElement('ul');
+                    section.links.forEach(link => {
+                        const listItem = document.createElement('li');
+                        const anchor = document.createElement('a');
+                        anchor.href = link.url;
+                        anchor.textContent = link.name;
+                        listItem.appendChild(anchor);
+                        linkList.appendChild(listItem);
+                    });
+                    sectionDiv.appendChild(linkList);
+                    footerContainer.appendChild(sectionDiv);
+                });
+            } else {
+                console.error('Aucune section de footer trouvée pour cette langue.');
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors du chargement des données du footer:', error);
+        });
+}
 
-console.log("rest 2")
+// Initialiser le footer avec la langue par défaut
+loadFooter('fr');

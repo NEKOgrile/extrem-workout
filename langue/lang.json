@@ -1,5 +1,5 @@
 {
- "fr": {
+    "fr": {
         "title": "Bienvenue dans mon projet",
         "description": "Ce texte est chargé depuis un fichier JSON en français.",
         "articles": [
@@ -10,7 +10,51 @@
             { "id": 5, "name": "Article 5" },
             { "id": 6, "name": "Article 6" },
             { "id": 7, "name": "Article 7" }
-        ]
+        ],
+        "footer": {
+            "sections": [
+                {
+                    "title": "Mes commandes",
+                    "links": [
+                        { "name": "Historique", "url": "#" },
+                        { "name": "Suivi", "url": "#" },
+                        { "name": "Retours", "url": "#" }
+                    ]
+                },
+                {
+                    "title": "Mes coordonnées",
+                    "links": [
+                        { "name": "Adresse", "url": "#" },
+                        { "name": "Téléphone", "url": "#" },
+                        { "name": "E-mail", "url": "#" }
+                    ]
+                },
+                {
+                    "title": "Paramètres",
+                    "links": [
+                        { "name": "Langue", "url": "#" },
+                        { "name": "Confidentialité", "url": "#" },
+                        { "name": "Notifications", "url": "#" }
+                    ]
+                },
+                {
+                    "title": "Aide",
+                    "links": [
+                        { "name": "Assistance client", "url": "#" },
+                        { "name": "FAQ", "url": "#" },
+                        { "name": "Contact", "url": "#" }
+                    ]
+                },
+                {
+                    "title": "Plus",
+                    "links": [
+                        { "name": "Réseaux sociaux", "url": "#" },
+                        { "name": "Histoire de l'entreprise", "url": "#" },
+                        { "name": "Carrière", "url": "#" }
+                    ]
+                }
+            ]
+        }
     },
     "en": {
         "title": "Welcome to my project",
@@ -23,6 +67,50 @@
             { "id": 5, "name": "Article 5" },
             { "id": 6, "name": "Article 6" },
             { "id": 7, "name": "Article 7" }
-        ]
+        ],
+        "footer": {
+            "sections": [
+                {
+                    "title": "My orders",
+                    "links": [
+                        { "name": "History", "url": "#" },
+                        { "name": "Tracking", "url": "#" },
+                        { "name": "Returns", "url": "#" }
+                    ]
+                },
+                {
+                    "title": "My details",
+                    "links": [
+                        { "name": "Address", "url": "#" },
+                        { "name": "Phone", "url": "#" },
+                        { "name": "Email", "url": "#" }
+                    ]
+                },
+                {
+                    "title": "Settings",
+                    "links": [
+                        { "name": "Language", "url": "#" },
+                        { "name": "Privacy", "url": "#" },
+                        { "name": "Notifications", "url": "#" }
+                    ]
+                },
+                {
+                    "title": "Help",
+                    "links": [
+                        { "name": "Customer support", "url": "#" },
+                        { "name": "FAQ", "url": "#" },
+                        { "name": "Contact", "url": "#" }
+                    ]
+                },
+                {
+                    "title": "More",
+                    "links": [
+                        { "name": "Social networks", "url": "#" },
+                        { "name": "Company history", "url": "#" },
+                        { "name": "Careers", "url": "#" }
+                    ]
+                }
+            ]
+        }
     }
 }
