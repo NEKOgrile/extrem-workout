@@ -3,34 +3,38 @@
 // === Variables globales ===
 let cartCount = 0; // Compteur d'articles dans le panier
 const bodyElement = document.body; // Référence au body
-const logoElement = document.getElementById('logo'); // Référence au logo
-const toggleDarkModeBtn = document.getElementById('toggle-dark-mode'); // Bouton mode sombre
-const languageSelect = document.getElementById('language-select'); // Sélecteur de langue
-const boutonHistoire = document.getElementById('open-story'); // bouton dans le footer
-
 
 // === Fonctions ===
 
+// Fonction pour attendre qu'un élément soit présent dans le DOM
+function waitForElement(selector, callback) {
+    const interval = setInterval(() => {
+        const element = document.querySelector(selector);
+        if (element) {
+            clearInterval(interval);
+            callback(element);
+        }
+    }, 100); // Vérifie toutes les 100ms
+}
+
 // Basculer le mode sombre
 function toggleDarkMode() {
-    const isDarkMode = bodyElement.classList.toggle('dark-mode'); // Ajoute ou enlève la classe dark-mode
-    logoElement.src = isDarkMode
-        ? 'image/grand-logo-sombre.jpg' // Logo sombre
-        : 'image/grand-logo.jpg'; // Logo clair
-    toggleDarkModeBtn.textContent = isDarkMode
-        ? 'Désactiver le mode sombre'
-        : 'Activer le mode sombre';
+    const isDarkMode = bodyElement.classList.toggle('dark-mode');
+    const logoElement = document.getElementById('logo');
+    const toggleDarkModeBtn = document.getElementById('toggle-dark-mode');
+
+    if (logoElement && toggleDarkModeBtn) {
+        logoElement.src = isDarkMode ? 'image/grand-logo-sombre.jpg' : 'image/grand-logo.jpg';
+        toggleDarkModeBtn.textContent = isDarkMode
+            ? 'Désactiver le mode sombre'
+            : 'Activer le mode sombre';
+    }
 }
 
 // Charger et appliquer les traductions selon la langue
 function setLanguage(lang) {
     fetch('./langue/lang.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Erreur HTTP ! statut : ${response.status}`);
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
             if (data[lang]) {
                 document.getElementById('title').textContent = data[lang].title;
@@ -39,19 +43,13 @@ function setLanguage(lang) {
                 console.error('Langue non disponible dans le JSON');
             }
         })
-        .catch(error => {
-            console.error('Erreur lors du chargement du JSON:', error);
-        });
+        .catch(error => console.error('Erreur lors du chargement du JSON:', error));
 }
 
 // Gérer les clics sur le bouton de recherche
 function handleSearch() {
-    const query = document.getElementById('search').value;
-    if (query) {
-        alert(`Vous avez recherché : ${query}`);
-    } else {
-        alert('Veuillez entrer un terme de recherche.');
-    }
+    const query = document.getElementById('search')?.value;
+    alert(query ? `Vous avez recherché : ${query}` : 'Veuillez entrer un terme de recherche.');
 }
 
 // Ajouter un article au panier
@@ -61,211 +59,204 @@ function addToCart() {
     alert('Ajout d’un article au panier.');
 }
 
-// === Écouteurs d'événements ===
-
-// Basculer le mode sombre
-toggleDarkModeBtn.addEventListener('click', toggleDarkMode);
-
-// Gestion du changement de langue
-languageSelect.addEventListener('change', (event) => {
-    setLanguage(event.target.value);
-    loadArticles(event.target.value);
-    loadFooter(event.target.value);
-
-    
-   
-});
-
-// Gestion de la recherche
-document.getElementById('search-button').addEventListener('click', handleSearch);
-
-// Ajouter au panier
-document.querySelector('.cart').addEventListener('click', addToCart);
-
-// === Initialisation ===
-setLanguage('fr'); // Langue par défaut
-// Fonction pour charger les articles depuis le fichier JSON
+// Charger les articles depuis le JSON
 function loadArticles(lang) {
     fetch('./langue/lang.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Erreur HTTP ! statut : ${response.status}`);
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            if (data[lang] && data[lang].articles) {
-                const articlesContainer = document.querySelector('.articles'); // Conteneur des articles
-                articlesContainer.innerHTML = ''; // Vider le conteneur avant d'ajouter des articles
+            if (data[lang]?.articles) {
+                const articlesContainer = document.querySelector('.articles');
+                articlesContainer.innerHTML = '';
 
                 data[lang].articles.forEach(article => {
-                    const button = document.createElement('button'); // Crée un bouton
-                    button.classList.add('article-button'); // Ajoute la classe au bouton
-                    button.textContent = article.name; // Définit le texte du bouton
+                    const button = document.createElement('button');
+                    button.classList.add('article-button');
+                    button.textContent = article.name;
                     button.addEventListener('click', () => {
                         alert(`Vous avez sélectionné : ${article.name}`);
                     });
-                    articlesContainer.appendChild(button); // Ajoute le bouton dans le conteneur
+                    articlesContainer.appendChild(button);
                 });
             } else {
                 console.error('Aucun article trouvé pour cette langue.');
             }
         })
+        .catch(error => console.error('Erreur lors du chargement des articles:', error));
+}
+
+// Charger dynamiquement le footer
+function loadFooter(lang) {
+    // Charger le HTML du footer
+    fetch('footer/footer.html')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP ${response.status} lors du chargement du HTML du footer.`);
+            }
+            return response.text();
+        })
+        .then(html => {
+            // Insérer le HTML dans le conteneur
+            const footerContainer = document.getElementById('footer-container');
+            footerContainer.innerHTML = html;
+            attachFooterEvents();
+
+            // Charger les données de langue
+            return fetch('./langue/lang.json');
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP ${response.status} lors du chargement du fichier JSON.`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Vérifier si les données pour la langue sont disponibles
+            if (!data[lang]?.footer?.sections || data[lang].footer.sections.length === 0) {
+                console.warn(`Aucune section de footer trouvée pour la langue "${lang}".`);
+                return;
+            }
+
+            // Créer les sections du footer
+            const footer = document.getElementById('footer');
+            footer.innerHTML = ''; // Réinitialiser le contenu
+
+            data[lang].footer.sections.forEach(section => {
+                addFooterSection(section, footer);
+            });
+        })
         .catch(error => {
-            console.error('Erreur lors du chargement des articles depuis le JSON:', error);
+            console.error('Erreur lors du chargement du footer ou des données de langue :', error);
         });
 }
 
+/**
+ * Ajoute une section au footer.
+ * @param {Object} section - La section à ajouter.
+ * @param {HTMLElement} footer - L'élément footer cible.
+ */
+function addFooterSection(section, footer) {
+    if (!section.title || !Array.isArray(section.links)) {
+        console.warn('Section de footer invalide :', section);
+        return;
+    }
 
-// Initialiser les articles avec la langue par défaut
-loadArticles('fr');
+    // Créer une div pour la section
+    const sectionDiv = document.createElement('div');
+    sectionDiv.classList.add('footer-section');
 
-function loadFooter(lang) {
-    // Chargement dynamique du contenu HTML du footer
-    fetch('footer/footer.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('footer-container').innerHTML = html;
-  
-        // Une fois le footer chargé, attache l'écouteur pour le bouton
-        attachFooterEvents();
-      })
-      .catch(error => {
-        console.error('Erreur lors du chargement du footer:', error);
-      });
-  
-    // Chargement des données depuis le JSON pour la langue spécifiée
-    fetch('./langue/lang.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Erreur HTTP ! statut : ${response.status}`);
+    // Ajouter le titre de la section
+    const title = document.createElement('h4');
+    title.textContent = section.title;
+    sectionDiv.appendChild(title);
+
+    // Ajouter la liste de liens
+    const list = document.createElement('ul');
+    section.links.forEach(link => {
+        if (!link.name || !link.url) {
+            console.warn('Lien invalide dans la section :', link);
+            return;
         }
-        return response.json();
-      })
-      .then(data => {
-        if (data[lang] && data[lang].footer) {
-          const footerContainer = document.getElementById('footer');
-          footerContainer.innerHTML = ''; // Vide le contenu du footer avant de le remplir dynamiquement
-  
-          // Parcourir chaque section du footer selon le JSON
-          data[lang].footer.sections.forEach(section => {
-            const sectionDiv = document.createElement('div');
-            sectionDiv.classList.add('footer-section');
-  
-            // Ajout du titre
-            const sectionTitle = document.createElement('h4');
-            sectionTitle.textContent = section.title;
-            sectionDiv.appendChild(sectionTitle);
-  
-            // Ajout de la liste avec les liens
-            const linkList = document.createElement('ul');
-            section.links.forEach(link => {
-              const listItem = document.createElement('li');
-              const anchor = document.createElement('a');
-              anchor.href = link.url;
-              anchor.textContent = link.name;
-              listItem.appendChild(anchor);
-              linkList.appendChild(listItem);
-            });
-            sectionDiv.appendChild(linkList);
-  
-            footerContainer.appendChild(sectionDiv);
-          });
-        } else {
-          console.error('Aucune section de footer trouvée pour cette langue.');
-        }
-      })
-      .catch(error => {
-        console.error('Erreur lors du chargement des données du footer:', error);
-      });
-  }
-  
-  // Attache les événements après le chargement dynamique du footer
-  function attachFooterEvents() {
+
+        const item = document.createElement('li');
+        const anchor = document.createElement('a');
+        anchor.href = link.url;
+        anchor.textContent = link.name;
+        item.appendChild(anchor);
+        list.appendChild(item);
+    });
+
+    sectionDiv.appendChild(list);
+    footer.appendChild(sectionDiv);
+}
+function attachFooterEvents() {
+    // Exemple : Ajouter un événement au bouton "open-story" du footer
     const boutonHistoire = document.getElementById('open-story');
     if (boutonHistoire) {
-      boutonHistoire.addEventListener('click', openStory);
+        boutonHistoire.addEventListener('click', openStory);
+    } else {
+        console.warn('Le bouton "open-story" est introuvable dans le footer.');
     }
-  }
-  
-  // Fonction pour afficher l'histoire lorsqu'on clique sur le bouton
-  function openStory() {
+}
+
+/**
+ * Fonction exécutée lorsqu'on clique sur le bouton d'histoire
+ */
+function openStory() {
     console.log("Bouton cliqué, histoire ouverte !");
-    
     const storyContainer = document.getElementById('story-container');
     if (storyContainer) {
-      storyContainer.style.display = 'flex';
+        storyContainer.style.display = 'flex'; // Affiche l'histoire
+    } else {
+        console.warn("Le conteneur de l'histoire est introuvable.");
     }
-  }
-  
-  // Initialiser le footer avec la langue par défaut
-  loadFooter('fr');
-  function histoire(lang) {
-    fetch('./langue/lang.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Erreur : ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        // Vérifier si les données existent dans le JSON
-        if (data[lang] && data[lang].histoire) {
-          // Mettre à jour le titre et le texte de l'histoire
-          document.getElementById('histoire-titre').textContent = data[lang].histoire.titre;
-          document.getElementById('histoire-texte').textContent = data[lang].histoire.texte;
-        } else {
-          console.error('Données d\'histoire non trouvées');
-        }
-      })
-      .catch(error => console.error('Erreur lors du chargement de l\'histoire :', error));
-  }
-  
-  histoire('fr');
+}
 
 
-  document.addEventListener("DOMContentLoaded", function () {
-    function waitForElement(selector, callback) {
-      const interval = setInterval(() => {
-        const element = document.querySelector(selector);
-        if (element) {
-          clearInterval(interval);
-          callback(element);
-        }
-      }, 100); // Vérifie toutes les 100ms
-    }
-  
-    waitForElement('#open-story', (storyButton) => {
-      waitForElement('.container-black', (containerBlack) => {
-        waitForElement('.story-card', (storyCard) => {
-          // Afficher la story quand on clique sur le bouton
-          storyButton.addEventListener('click', function (e) {
-            containerBlack.classList.add('active');
-            storyCard.classList.add('active');
-            e.stopPropagation(); // Empêche que l'événement se propage
-          });
-  
-          // Fermer la story en cliquant sur la superposition
-          containerBlack.addEventListener('click', function (e) {
-            containerBlack.classList.remove('active');
-            storyCard.classList.remove('active');
-          });
-  
-          // Fermer la story en cliquant en dehors de la carte
-          document.addEventListener('click', function (e) {
-            if (
-              storyCard.classList.contains('active') &&
-              !storyCard.contains(e.target) &&
-              !storyButton.contains(e.target)
-            ) {
-              containerBlack.classList.remove('active');
-              storyCard.classList.remove('active');
+// Charger dynamiquement le header
+function loadHeader() {
+    fetch('header/header.html')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('header-container').innerHTML = html;
+
+            // Ajouter les événements pour le header
+            const toggleDarkModeBtn = document.getElementById('toggle-dark-mode');
+            if (toggleDarkModeBtn) {
+                toggleDarkModeBtn.addEventListener('click', toggleDarkMode);
             }
-          });
-        });
-      });
-    });
-  });
-  
+        })
+        .catch(error => console.error('Erreur lors du chargement du header:', error));
+}
 
-  
+// Charger l'histoire
+function histoire(lang) {
+    fetch('./langue/lang.json')
+        .then(response => response.json())
+        .then(data => {
+            if (data[lang]?.histoire) {
+                document.getElementById('histoire-titre').textContent = data[lang].histoire.titre;
+                document.getElementById('histoire-texte').textContent = data[lang].histoire.texte;
+            } else {
+                console.error('Données d\'histoire non trouvées');
+            }
+        })
+        .catch(error => console.error('Erreur lors du chargement de l\'histoire:', error));
+}
+
+// === Initialisation ===
+document.addEventListener('DOMContentLoaded', () => {
+    loadHeader(); // Charger le header
+    setLanguage('fr'); // Charger la langue par défaut
+    loadArticles('fr'); // Charger les articles
+    loadFooter('fr'); // Charger le footer
+    histoire('fr'); // Charger l'histoire
+
+    // Gérer les événements pour les stories
+    waitForElement('#open-story', storyButton => {
+        waitForElement('.container-black', containerBlack => {
+            waitForElement('.story-card', storyCard => {
+                storyButton.addEventListener('click', e => {
+                    containerBlack.classList.add('active');
+                    storyCard.classList.add('active');
+                    e.stopPropagation();
+                });
+
+                containerBlack.addEventListener('click', () => {
+                    containerBlack.classList.remove('active');
+                    storyCard.classList.remove('active');
+                });
+
+                document.addEventListener('click', e => {
+                    if (
+                        storyCard.classList.contains('active') &&
+                        !storyCard.contains(e.target) &&
+                        !storyButton.contains(e.target)
+                    ) {
+                        containerBlack.classList.remove('active');
+                        storyCard.classList.remove('active');
+                    }
+                });
+            });
+        });
+    });
+});
