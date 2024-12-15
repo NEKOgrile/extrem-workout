@@ -116,7 +116,17 @@ function loadArticles(lang) {
 
 // Initialiser les articles avec la langue par défaut
 loadArticles('fr');
+
 function loadFooter(lang) {
+    fetch('footer/footer.html')
+    .then(response => response.text())
+    .then(html => {
+      document.getElementById('footer-container').innerHTML = html;
+    })
+    .catch(error => {
+      console.error('Erreur lors du chargement du footer:', error);
+    });
+
     fetch('./langue/lang.json')
         .then(response => {
             if (!response.ok) {
@@ -163,3 +173,5 @@ function loadFooter(lang) {
 
 // Initialiser le footer avec la langue par défaut
 loadFooter('fr');
+
+
