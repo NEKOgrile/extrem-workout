@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flexbox Layout</title>
     <link rel="stylesheet" href="header/header.css">
+    <link rel="stylesheet" href="../header/header.css">
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="user-profile">
-            <img src="image/logo.jpg" alt="Profil" class="profile-img">
+            <img src="image/logo.jpg" alt="Profil" class="profile-img" 
+                 onerror="this.src='../image/logo.jpg';">
         </div>
+        
 
         <div class="search-bar">
             <input type="text" id="search" placeholder="Rechercher...">

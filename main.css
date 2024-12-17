@@ -4,7 +4,7 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
-    color: #333;
+    color: rgb(51, 51, 51);
     box-sizing: border-box;
     transition: background-color 0.3s, color 0.3s;
 }
@@ -68,7 +68,7 @@ body.dark-mode {
     align-items: center;
     width: 75%; /* Le reste de l'espace disponible */
     height: 100%; /* Ajuste la hauteur pour être identique */
-    background-color: white;
+    background-color: #f4f4f9;
     box-sizing: border-box;
 }
 
@@ -78,7 +78,7 @@ body.dark-mode {
     border: none;
     border-radius: 5px;
     background-color: #007bff;
-    color: rgb(255, 255, 255);
+    color: #f4f4f9;
     cursor: pointer;
     transition: background-color 0.3s;
     max-width: 100%; /* Empêche de dépasser le conteneur */
@@ -100,7 +100,7 @@ body.dark-mode {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    background-color: white;
+    background-color: #f4f4f9;
 }
 
 /* Logo doit prendre TOUTE la place */
@@ -141,7 +141,7 @@ body.dark-mode #logo {
 }
 
 #toggle-dark-mode:hover {
-    background-color: #555;
+    background-color: rgb(85, 85, 85);
 }
 
 /* Mode sombre pour les composants */
@@ -154,8 +154,8 @@ body.dark-mode .articles {
 }
 
 body.dark-mode .flexbox-container {
-    background-color: #000000;
-    border-color: #555;
+    background-color: #1e1e2f;
+    border-color: rgb(85, 85, 85);
 }
 
 /* Bulle Nouveauté */
