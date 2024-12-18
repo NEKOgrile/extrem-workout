@@ -43,3 +43,90 @@ article h2 {
     margin-bottom: 0.5rem;
     color: #007acc;
 }
+body.dark-mode {
+    background-color: #1e1e2f;
+    color: #ffffff;
+}
+
+body.dark-mode .container {
+    background-color: #1e1e2f;
+}
+
+.dark-mode a {
+    color: #bb86fc;
+}
+
+
+/* Conteneur principal */
+.article_test {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    perspective: 1500px; /* Ajoute la profondeur 3D */
+}
+
+/* Plateau */
+.div_test {
+    background-color: #ddd;
+    border-radius: 2rem;
+    box-shadow: inset 10px 10px 20px #999, inset -10px -10px 20px #fff;
+    width: 300px;
+    aspect-ratio: 1; /* Carré */
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease, box-shadow 0.8s ease;
+    overflow: visible;
+}
+
+/* Image principale */
+.test_image {
+    position: absolute;
+    width: 60%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(30px) rotateX(10deg);
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease;
+    backface-visibility: hidden;
+}
+
+/* Effet de réflexion dynamique (pseudo-élément) */
+.div_test::after {
+    content: "";
+    position: absolute;
+    top: 50%; /* Place la réflexion juste en dessous de l'image */
+    left: 50%;
+    transform: translateX(-50%) scaleY(-1) scale(1.2); /* Crée un miroir vertical en bas */
+    width: 60%;
+    height: 50%; /* La taille du reflet */
+    background-image: url('../image/gourde.png'); /* Utilise la même image */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0; /* Masquer par défaut */
+    filter: blur(6px);
+    transition: opacity 0.3s ease; /* Apparition douce */
+    z-index: -1;
+}
+
+/* Au survol, activer le reflet */
+.div_test:hover::after {
+    opacity: 0.4; /* Rend la réflexion visible au survol */
+}
+
+/* Effet au survol */
+.div_test:hover {
+    transform: rotateX(30deg) translateZ(0);
+    box-shadow: 10px 10px 20px #999, -10px -10px 20px #fff;
+}
+
+/* Effet 3D sur l'image */
+.div_test:hover .test_image {
+    transform: translate(-50%, -50%) translateZ(150px) rotateX(-25deg) scale(1.2);
+}
+
+
+
+
+
