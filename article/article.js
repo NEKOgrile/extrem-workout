@@ -260,3 +260,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
+const canvas = document.getElementById("star-element");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const stars = [];
+const starCount = 200;
+
+// Création des étoiles avec des propriétés aléatoires
+for (let i = 0; i < starCount; i++) {
+  stars.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.random() * 2 + 1,
+    speed: Math.random() * 1, // Réduit la plage de vitesse
+});
+}
+
+// Fonction pour dessiner une étoile
+function drawStar(star) {
+  ctx.beginPath();
+  ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+  ctx.fillStyle = "white";
+  ctx.fill();
+}
+
+// Animation des étoiles
+function animate() {
+  // Efface une couche translucide pour un effet fluide
+  ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  for (const star of stars) {
+    drawStar(star);
+
+    // Fait descendre les étoiles
+    star.y += star.speed;
+
+    // Recycle les étoiles qui sortent de l'écran
+    if (star.y > canvas.height) {
+      star.y = -star.size; // Remonte en haut
+      star.x = Math.random() * canvas.width; // Position aléatoire
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+// Ajuste la taille du canvas quand la fenêtre est redimensionnée
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+animate();

@@ -17,14 +17,26 @@ function waitForElement(selector, callback) {
     }, 100); // Vérifie toutes les 100ms
 }
 
-// Basculer le mode sombre
 function toggleDarkMode() {
     const isDarkMode = bodyElement.classList.toggle('dark-mode');
-    const logoElement = document.getElementById('logo');
-    const toggleDarkModeBtn = document.getElementById('toggle-dark-mode');
+    
+    // Afficher les étoiles et masquer les autres éléments si en mode sombre
+    const starElements = document.querySelectorAll('.star-element');
+    if (isDarkMode) {
+        starElements.forEach(star => star.style.display = 'block'); // Afficher les étoiles
+        // Vous pouvez masquer d'autres éléments si nécessaire
+    } else {
+        starElements.forEach(star => star.style.display = 'none'); // Masquer les étoiles
+    }
 
-    if (logoElement && toggleDarkModeBtn) {
+    // Autres changements relatifs au mode sombre, comme le logo, etc.
+    const logoElement = document.getElementById('logo');
+    if (logoElement) {
         logoElement.src = isDarkMode ? 'image/grand-logo-sombre.jpg' : 'image/grand-logo.jpg';
+    }
+
+    const toggleDarkModeBtn = document.getElementById('toggle-dark-mode');
+    if (toggleDarkModeBtn) {
         toggleDarkModeBtn.textContent = isDarkMode
             ? 'Désactiver le mode sombre'
             : 'Activer le mode sombre';
@@ -260,3 +272,59 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+const canvas = document.getElementById("star-element");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const stars = [];
+const starCount = 200;
+
+// Création des étoiles avec des propriétés aléatoires
+for (let i = 0; i < starCount; i++) {
+  stars.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.random() * 2 + 1,
+    speed: Math.random() * 1, // Réduit la plage de vitesse
+});
+}
+
+// Fonction pour dessiner une étoile
+function drawStar(star) {
+  ctx.beginPath();
+  ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+  ctx.fillStyle = "white";
+  ctx.fill();
+}
+
+// Animation des étoiles
+function animate() {
+  // Efface une couche translucide pour un effet fluide
+  ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  for (const star of stars) {
+    drawStar(star);
+
+    // Fait descendre les étoiles
+    star.y += star.speed;
+
+    // Recycle les étoiles qui sortent de l'écran
+    if (star.y > canvas.height) {
+      star.y = -star.size; // Remonte en haut
+      star.x = Math.random() * canvas.width; // Position aléatoire
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+// Ajuste la taille du canvas quand la fenêtre est redimensionnée
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+animate();

@@ -1,3 +1,29 @@
+html {
+    height: 100%;
+    background: radial-gradient(ellipse, #1B2735 0%, #090A0F 100%);
+}
+
+canvas {
+    position: fixed; /* Fixe la position */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Canvas derrière tout le reste */
+    pointer-events: none; /* Empêche le canvas d'interférer avec les autres éléments interactifs */
+}
+
+/* Par défaut, cachez les étoiles (ou éléments non désirés) en mode normal */
+.star-element {
+    display: none;
+}
+
+/* En mode sombre, affichez les étoiles */
+body.dark-mode .star-element {
+    display: block;
+}
+
+
 /* Général */
 body {
     margin: 0;
@@ -26,6 +52,7 @@ body.dark-mode {
 
 /* Alignement et flexibilité */
 .articles {
+    z-index: 2; /* Placer les articles au-dessus du canvas */
     display: flex; /* Passe en flexbox */
     flex-direction: column; /* Aligne les boutons en colonne */
     justify-content: center; /* Centre les boutons verticalement */
@@ -63,6 +90,7 @@ body.dark-mode {
 
 /* Flexbox container */
 .flexbox-container {
+    z-index: 2; /* Placer au-dessus du canvas */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -90,21 +118,10 @@ body.dark-mode {
 .article-button:hover {
     background-color: #0056b3;
 }
-/* Flexbox container */
-.flexbox-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%; /* Utilise toute la largeur */
-    height: 55vh; /* Utilise toute la hauteur de la fenêtre */
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    background-color: #f4f4f9;
-}
 
 /* Logo doit prendre TOUTE la place */
 .logo {
+    z-index: 2; /* Placer le logo au-dessus du canvas */
     width: 75%;
     height: 100%;
     object-fit: cover; /* Fait en sorte que l'image couvre complètement le conteneur */
@@ -160,6 +177,7 @@ body.dark-mode .flexbox-container {
 
 /* Bulle Nouveauté */
 .bulle-nouveaute {
+    z-index: 3; /* Placer au-dessus des autres éléments */
     margin-top: -50px;
     width: 300px;
     height: 80px;
@@ -214,6 +232,7 @@ body.dark-mode .bulle-nouveaute span {
 
 /* Article individuel */
 .article-item {
+    z-index: 2; /* Placer les articles au-dessus du canvas */
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -333,9 +352,7 @@ body.dark-mode .article-action:hover {
     }
 }
 
-
-
-  /* Effets principaux */
+/* Effets principaux */
 .story-container {
     position: fixed;
     top: 0;
@@ -352,10 +369,9 @@ body.dark-mode .article-action:hover {
     z-index: 1000; /* S'assurer que c'est au-dessus des autres éléments */
     overflow-y: auto;
     text-align: justify;
-  }
-  
-  /* Retour pour fermer l'affichage */
-  .close-story {
+}
+
+.close-story {
     position: absolute;
     top: 10px;
     right: 20px;
@@ -365,7 +381,8 @@ body.dark-mode .article-action:hover {
     padding: 8px 12px;
     cursor: pointer;
     border-radius: 5px;
-  }
-  .language-select{
+}
+
+.language-select {
     display: none;
-  }
+}

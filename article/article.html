@@ -3,30 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Article</title>
+    <title>Catalogue</title>
     <link rel="stylesheet" href="./article.css">
 </head>
 <body>
     <header>
         <!-- Zone où le header sera chargé -->
-<div id="header-container"></div>
-  </header>
-    <!-- Header dynamique -->
-    <div id="header-container"></div>
-    
-    <!-- Contenu principal de l'article -->
-    <main>
-        <article class="article_test">
-            <div class="div_test">
-                <img class="test_image" src="../image/gourde.png" alt="">
-            </div>
-        </article>
-    </main>
-    
-    <!-- Footer dynamique -->
-    <div id="footer-container"></div>
+        <div id="header-container"></div>
+    </header>
 
-    <!-- Fichiers JavaScript -->
-    <script src="./article.js"></script>
+    <main>
+        <section class="catalogue">
+            <!-- Premier produit -->
+            <article class="article_test">
+                <div class="div_test">
+                    <img class="test_image" src="../image/gourde.png" alt="Gourde">
+                    <div class="reflection"></div>
+                </div>
+                <h3>Gourde en inox</h3>
+                <p>Une gourde pratique pour vos aventures.</p>
+            </article>
+
+            <!-- Deuxième produit -->
+            <article class="article_test">
+                <div class="div_test">
+                    <img class="test_image" src="../image/lunettes.png" alt="Lunettes">
+                    <div class="reflection"></div>
+                </div>
+                <h3>Lunettes de soleil</h3>
+                <p>Protège vos yeux avec style.</p>
+            </article>
+
+            <!-- Troisième produit -->
+            <article class="article_test">
+                <div class="div_test">
+                    <img class="test_image" src="../image/casque.png" alt="Casque audio">
+                    <div class="reflection"></div>
+                </div>
+                <h3>Casque audio</h3>
+                <p>Un son immersif et des basses puissantes.</p>
+            </article>
+
+            <!-- Ajoutez plus d'articles ici -->
+        </section>
+    </main>
+
+    <footer>
+        <div id="footer-container"></div>
+    </footer>
+     <!-- Fichiers JavaScript -->
+     <canvas id="star-element" class="star-element"></canvas>
+
+     <script src="./article.js"></script>
 </body>
 </html>
