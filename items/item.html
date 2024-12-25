@@ -4,37 +4,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flexbox Layout</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="item.css">
 </head>
 <body>
-    <!-- Header -->
     <header>
-        <div class="user-profile">
-            <img src="image/logo.jpg" alt="Profil" class="profile-img">
-        </div>
-
-        <div class="search-bar">
-            <input type="text" id="search" placeholder="Rechercher...">
-            <button id="search-button">🔍</button>
-        </div>
-
-        <div class="header-actions">
-            <select id="language-select" class="language-select">
-                <option value="fr">Français</option>
-                <option value="en">English</option>
-            </select>
-            <button id="toggle-dark-mode" class="dark-mode-toggle">Mode Sombre</button>
-            <div class="cart">
-                🛒 <span id="cart-count">0</span>
+        <!-- Zone où le header sera chargé -->
+        <div id="header-container"></div>
+    </header>
+    <div class="product-page">
+        <!-- Section de l'image produit -->
+        <div class="product-image-section">
+            <img src="../image/image nouveau 1 .jpg" alt="Product Image" class="main-image">
+            <div class="thumbnail-gallery">
+                <img src="../image/image nouveau 1 .jpg" alt="Thumbnail" class="thumbnail">
+                <img src="../image/image nouveau 1 .jpg" alt="Thumbnail" class="thumbnail">
+                <img src="../image/image nouveau 1 .jpg" alt="Thumbnail" class="thumbnail">
+                <img src="../image/image nouveau 1 .jpg" alt="Thumbnail" class="thumbnail">
             </div>
         </div>
-    </header>
-    <div id="footer-container"></div>
+        <!-- Section des détails du produit -->
+        <div class="product-details-section">
+            <h1>Women Pink Shirt</h1>
+            <p class="price">
+                <span class="original-price">$459.00</span>
+                <span class="discount">55% Off</span>
+                <span class="final-price">$32.96</span>
+            </p>
+            <div class="color-options">
+                <label>Select Color:</label>
+                <div class="colors">
+                    <span class="color-option" style="background-color: #e8e8e8;"></span>
+                    <span class="color-option" style="background-color: #d9d9f2;"></span>
+                    <span class="color-option" style="background-color: #cccccc;"></span>
+                </div>
+            </div>
+            <div class="size-options">
+                <label for="size">Select Size:</label>
+                <div class="sizes">
+                    <button>S</button>
+                    <button>M</button>
+                    <button>L</button>
+                    <button>XL</button>
+                </div>
+                <a href="#" class="size-chart">Size Chart</a>
+            </div>
+            <div class="quantity-selector">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" min="1" value="1">
+            </div>
+            <div class="action-buttons">
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="buy-now">Buy Now</button>
+            </div>
+            <div class="product-description">
+                <h2>Product Details</h2>
+                <p>
+                    Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.
+                </p>
+            </div>
+            <div class="wishlist">
+                <a href="#">Add To Wishlist</a>
+            </div>
+        </div>
+    </div>
 
+    <!-- Nouvelle section -->
 
-      
+    <div class="description-tabs">
+        <ul class="tabs">
+            <li class="tab active">Description</li>
+            <li class="tab">Details</li>
+            <li class="tab">Video</li>
+            <li class="tab">Write Review</li>
+        </ul>
+        <div class="tab-content">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+        </div>
+    </div>
 
-          <script src="main.js"></script>
+    <div class="related-products">
+        <h2>Related Products</h2>
+        <div class="product-grid">
+            <div class="product">
+                <img src="../image/image nouveau 2 .jpg" alt="Hoodie">
+                <p class="product-name">Slim Fit Cotton Shirt</p>
+                <p class="product-price">$500.00</p>
+                <div class="color-options">
+                    <span class="color-option" style="background-color: #000;"></span>
+                    <span class="color-option" style="background-color: #ccc;"></span>
+                    <span class="color-option" style="background-color: #888;"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="../image/image nouveau 2 .jpg" alt="Hoodie">
+                <p class="product-name">Slim Fit Cotton Shirt</p>
+                <p class="product-price">$500.00</p>
+                <div class="color-options">
+                    <span class="color-option" style="background-color: #000;"></span>
+                    <span class="color-option" style="background-color: #ccc;"></span>
+                    <span class="color-option" style="background-color: #888;"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="../image/image nouveau 2 .jpg" alt="Hoodie">
+                <p class="product-name">Slim Fit Cotton Shirt</p>
+                <p class="product-price">$500.00</p>
+                <div class="color-options">
+                    <span class="color-option" style="background-color: #000;"></span>
+                    <span class="color-option" style="background-color: #ccc;"></span>
+                    <span class="color-option" style="background-color: #888;"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="../image/image nouveau 2 .jpg" alt="Hoodie">
+                <p class="product-name">Slim Fit Cotton Shirt</p>
+                <p class="product-price">$500.00</p>
+                <div class="color-options">
+                    <span class="color-option" style="background-color: #000;"></span>
+                    <span class="color-option" style="background-color: #ccc;"></span>
+                    <span class="color-option" style="background-color: #888;"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div id="footer-container"></div>
+    </footer>
+    <canvas id="star-element" class="star-element"></canvas>
 
+    <script src="item.js"></script>
 </body>
 </html>
