@@ -318,3 +318,19 @@ window.addEventListener("resize", () => {
 });
 
 animate();
+
+const tabs = document.querySelectorAll(".tab");
+const contents = document.querySelectorAll(".tab-content");
+
+tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+        // Supprime la classe active de tous les onglets et contenus
+        tabs.forEach(t => t.classList.remove("active"));
+        contents.forEach(c => c.classList.remove("active"));
+
+        // Ajoute la classe active au clic de l'onglet et au contenu correspondant
+        tab.classList.add("active");
+        const target = document.getElementById(tab.getAttribute("data-tab"));
+        target.classList.add("active");
+    });
+});
