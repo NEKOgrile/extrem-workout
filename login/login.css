@@ -1,0 +1,143 @@
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.dark-mode h2 {
+    color: #aaa; /* Couleur plus douce pour les titres */
+}
+/* Canvas des étoiles */
+canvas {
+    position: fixed; /* Fixe la position */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Canvas derrière tout le reste */
+    pointer-events: none; /* Empêche le canvas d'interférer avec les autres éléments interactifs */
+}
+
+/* Par défaut, cachez les étoiles (ou éléments non désirés) en mode normal */
+.star-element {
+    display: none;
+}
+
+/* En mode sombre, affichez les étoiles */
+body.dark-mode .star-element {
+    display: block;
+}
+
+/* Style général */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    background-image:url("https://assets.imgix.net/hp/snowshoe.jpg?q=70&w=1600&auto=compress%2Cenhance&fm=jpeg&ixlib=imgixjs-3.4.1");    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #fff;
+}
+
+
+/* Conteneur principal */
+.login-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Boîte de connexion */
+.login-box {
+    padding: 25px 30px;
+    border-radius: 10px;
+    text-align: center;
+    width: 350px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent */
+    backdrop-filter: blur(15px); /* Effet de flou */
+    -webkit-backdrop-filter: blur(15px); /* Compatibilité Safari */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    
+}
+
+
+
+.login-box h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Champs de saisie */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 16px;
+}
+
+/* Options */
+.options {
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+body.dark-mode .options {
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+body.dark-mode .input-field {
+    color: rgb(255, 255, 255);
+
+}
+
+.options a {
+    color: #1e90ff;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/* Bouton de connexion */
+.login-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #1e90ff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #1c86ee;
+}
+
+/* Texte d'inscription */
+.register {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.register a {
+    color: #1e90ff;
+    text-decoration: none;
+}
+
