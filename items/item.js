@@ -334,3 +334,58 @@ tabs.forEach(tab => {
         target.classList.add("active");
     });
 });
+
+
+function openZoom(image) {
+    const modal = document.getElementById('zoomModal');
+    const zoomImage = document.getElementById('zoomImage');
+    const zoomMap = document.getElementById('zoomMap');
+
+    // Charge l'image dans la modale
+    zoomImage.src = image.src;
+
+    // Positionne la vignette
+    zoomMap.style.backgroundImage = `url(${image.src})`;
+
+    // Affiche la modale
+    modal.style.display = 'flex';
+
+    // Ajoute un événement de zoom
+    zoomImage.addEventListener('mousemove', zoom);
+}
+
+function closeZoom() {
+    const modal = document.getElementById('zoomModal');
+    modal.style.display = 'none';
+
+    // Réinitialise le zoom
+    const zoomImage = document.getElementById('zoomImage');
+    zoomImage.style.transform = 'none';
+    zoomImage.style.transformOrigin = 'center center';
+}
+
+function zoom(event) {
+    const zoomImage = event.target;
+    const zoomMap = document.getElementById('zoomMap');
+
+    // Calcul de la position du zoom
+    const rect = zoomImage.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const xPercent = (x / rect.width) * 100;
+    const yPercent = (y / rect.height) * 100;
+
+    // Déplacement de l'image
+    zoomImage.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+    zoomImage.style.transform = 'scale(2)';
+
+    // Mise à jour de la vignette (si nécessaire)
+    zoomMap.style.backgroundPosition = `${100 - xPercent}% ${100 - yPercent}%`;
+}
+
+// Réinitialise le zoom à la sortie de la souris
+document.getElementById('zoomImage').addEventListener('mouseleave', () => {
+    const zoomImage = document.getElementById('zoomImage');
+    zoomImage.style.transform = 'none';
+    zoomImage.style.transformOrigin = 'center center';
+});

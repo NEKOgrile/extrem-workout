@@ -462,3 +462,59 @@ body.dark-mode .star-element {
 .div_test:hover .test_image {
     transform: translate(-50%, -50%) translateZ(150px) rotateX(-25deg) scale(1.2);
 }
+/* Modale de zoom */
+.zoom-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.zoom-container {
+    position: relative;
+    max-width: 80%;
+    max-height: 80%;
+    overflow: hidden;
+}
+
+#zoomImage {
+    width: 100%;
+    height: auto;
+    cursor: zoom-in;
+}
+
+.zoom-map {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #fff;
+    background: rgba(255, 255, 255, 0.2);
+    background-image: url('../image/image nouveau 1 .jpg');
+    background-size: 100% 100%;
+    cursor: pointer;
+}
+.image-container {
+    overflow: hidden; /* Important pour éviter les débordements */
+    position: relative;
+  }
+  
+  .image-container img {
+    will-change: transform;
+
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease; /* Lissage pour éviter le clignotement */
+  }
+  
+  .image-container:hover img {
+    transform: scale(1.2); /* Zoom fluide */
+  }
+  

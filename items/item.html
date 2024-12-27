@@ -13,15 +13,24 @@
     </header>
     <div class="product-page">
         <!-- Section de l'image produit -->
-        <div class="product-image-section">
-            <img src="../image/image nouveau 1 .jpg" alt="Product Image" class="main-image">
-            <div class="thumbnail-gallery">
-                <img src="../image/image nouveau 1 .jpg" alt="Thumbnail" class="thumbnail">
-                <img src="../image/image nouveau 1 .jpg" alt="Thumbnail" class="thumbnail">
-                <img src="../image/image nouveau 1 .jpg" alt="Thumbnail" class="thumbnail">
-                <img src="../image/image nouveau 1 .jpg" alt="Thumbnail" class="thumbnail">
-            </div>
-        </div>
+<div class="product-image-section">
+    <img src="../image/image nouveau 1 .jpg" alt="Product Image" class="main-image" onclick="openZoom(this)">
+    <div class="thumbnail-gallery">
+        <img src="../image/image nouveau 1 .jpg" alt="Thumbnail" class="thumbnail">
+        <img src="../image/image nouveau 1 .jpg" alt="Thumbnail" class="thumbnail">
+        <img src="../image/image nouveau 1 .jpg" alt="Thumbnail" class="thumbnail">
+        <img src="../image/image nouveau 1 .jpg" alt="Thumbnail" class="thumbnail">
+    </div>
+</div>
+
+<!-- Modal pour le zoom -->
+<div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
+    <div class="zoom-container" onclick="event.stopPropagation()">
+        <img id="zoomImage" src="" alt="Zoomed Image">
+        <div id="zoomMap" class="zoom-map"></div>
+    </div>
+</div>
+
         <!-- Section des détails du produit -->
         <div class="product-details-section">
             <h1>Women Pink Shirt</h1>
