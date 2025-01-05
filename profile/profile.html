@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Profil</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <header>
+        <div id="header-container"></div>
+    </header>
+
+    <div class="container-profile">
+        <div class="profile-section">
+            <!-- Adresse E-mail -->
+            <div class="profile-button">
+                <h3>Adresse E-mail</h3>
+                <input type="email" id="email" value="exemple@mail.com" disabled>
+                <button onclick="toggleEdit('email')">Modifier</button>
+            </div>
+
+            <!-- Prénom -->
+            <div class="profile-button">
+                <h3>Prénom</h3>
+                <input type="text" id="prenom" value="John" disabled>
+                <button onclick="toggleEdit('prenom')">Modifier</button>
+            </div>
+
+            <!-- Nom -->
+            <div class="profile-button">
+                <h3>Nom</h3>
+                <input type="text" id="nom" value="Doe" disabled>
+                <button onclick="toggleEdit('nom')">Modifier</button>
+            </div>
+
+            <!-- Mot de passe -->
+            <div class="profile-button">
+                <h3>Mot de passe</h3>
+                <input type="password" id="password" value="********" disabled>
+                <button onclick="toggleEdit('password')">Modifier</button>
+            </div>
+
+            <!-- Adresse physique -->
+            <div class="profile-button">
+                <h3>Adresse Physique</h3>
+                <input type="text" id="adresse" value="123 Rue Exemple" disabled>
+                <button onclick="toggleEdit('adresse')">Modifier</button>
+            </div>
+            <div class="profile-button">
+                <h3>Mes Commandes</h3>
+            </div>
+            <div class="profile-button">
+                <h3>Mode de Paiement</h3>
+            </div>
+            <div class="profile-button">
+                <h3>Contact Support</h3>
+            </div>
+            <div class="profile-button">
+                <h3>Déconnexion</h3>
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <div id="footer-container"></div>
+    </footer>
+    <canvas id="star-element" class="star-element"></canvas>
+
+    <script src="profile.js"></script>
+</body>
+</html>

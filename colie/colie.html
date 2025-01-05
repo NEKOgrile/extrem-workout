@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi du colis</title>
+    <link rel="stylesheet" href="colie.css">
+</head>
+<body>
+    <header>
+        <!-- Zone où le header sera chargé -->
+        <div id="header-container"></div>
+    </header>
+
+    <div class="refund-container">
+        <!-- Zone supérieure pour l'image et le titre de l'article -->
+        <div class="article-header">
+            <img src="https://via.placeholder.com/80" alt="Image de l'article">
+            <div class="article-title">Titre de l'article :</div>
+        </div>
+
+        <!-- Contenu principal -->
+        <div class="refund-content">
+            <div class="refund-header">Votre colis à etais pris en compt</div>
+            <div class="refund-title">Votre colis est en cours d'envoi</div>
+            <div class="refund-info">le colis sera chez vous dans environ 5 jours apres la commande</div>
+
+            <!-- Barre de progression -->
+            <div class="progress-bar">
+                <div class="step-container">
+                    <div class="step completed" id="step-init">
+                        <div class="circle">✔</div>
+                        <div class="label">commande prise. <br><span style="font-size: 12px;">27 déc.</span></div>
+                    </div>
+                    <div class="step" id="step-depose">
+                        <div class="circle">✔</div>
+                        <div class="label">envoyer <br><span style="font-size: 12px;">3 janv.</span></div>
+                    </div>
+                    <div class="step" id="step-remboursement">
+                        <div class="circle">✔</div>
+                        <div class="label">en cours <br><span style="font-size: 12px;">3 janv.</span></div>
+                    </div>
+                    <div class="step" id="step-credite">
+                        <div class="circle">○</div>
+                        <div class="label">arrivé<br><span style="font-size: 12px;">12 janv.</span></div>
+                    </div>
+                </div>
+                <div class="progress-bar-track">
+                    <div id="progress-bar-fill" class="progress-bar-fill"></div>
+                </div>
+            </div>
+
+            <div class="refund-summary">
+                <div class="total">Total de larticle : 119,95 €</div>
+                <div class="details">Retour gratuit<br>119,95 € credité sur votre compte MasterCard se terminant par 0000.</div>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="star-element" class="star-element"></canvas>
+
+    <footer>
+        <div id="footer-container"></div>
+    </footer>
+
+    <script src="colie.js"></script>
+</body>
+</html>
