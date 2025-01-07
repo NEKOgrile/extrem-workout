@@ -7,14 +7,71 @@
     },
         "description": "Ce texte est chargé depuis un fichier JSON en français.",
         "articles": [
-            { "id": 1, "name": "Article 1" },
-            { "id": 2, "name": "Article 2" },
-            { "id": 3, "name": "Article 3" },
-            { "id": 4, "name": "Article 4" },
-            { "id": 5, "name": "Article 5" },
-            { "id": 6, "name": "Article 6" },
-            { "id": 7, "name": "Article 7" }
-        ],
+    {
+        "id": 1,
+        "name": "Article 1",
+        "subArticles": [
+            { "id": 1.1, "name": "Article 1.1" },
+            { "id": 1.2, "name": "Article 1.2" },
+            { "id": 1.3, "name": "Article 1.3" }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Article 2",
+        "subArticles": [
+            { "id": 2.1, "name": "Article 2.1" },
+            { "id": 2.2, "name": "Article 2.2" },
+            { "id": 2.3, "name": "Article 2.3" }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Article 3",
+        "subArticles": [
+            { "id": 3.1, "name": "Article 3.1" },
+            { "id": 3.2, "name": "Article 3.2" },
+            { "id": 3.3, "name": "Article 3.3" }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Article 4",
+        "subArticles": [
+            { "id": 4.1, "name": "Article 4.1" },
+            { "id": 4.2, "name": "Article 4.2" },
+            { "id": 4.3, "name": "Article 4.3" }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Article 5",
+        "subArticles": [
+            { "id": 5.1, "name": "Article 5.1" },
+            { "id": 5.2, "name": "Article 5.2" },
+            { "id": 5.3, "name": "Article 5.3" }
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Article 6",
+        "subArticles": [
+            { "id": 6.1, "name": "Article 6.1" },
+            { "id": 6.2, "name": "Article 6.2" },
+            { "id": 6.3, "name": "Article 6.3" }
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Article 7",
+        "subArticles": [
+            { "id": 7.1, "name": "Article 7.1" },
+            { "id": 7.2, "name": "Article 7.2" },
+            { "id": 7.3, "name": "Article 7.3" }
+        ]
+    }
+],
+
         "footer": {
             "sections": [
                 {

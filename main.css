@@ -9,7 +9,7 @@ canvas {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Canvas derrière tout le reste */
+    z-index: 0; /* Canvas derrière tout le reste */
     pointer-events: none; /* Empêche le canvas d'interférer avec les autres éléments interactifs */
 }
 
@@ -41,52 +41,145 @@ body.dark-mode {
     color: #dcdcdc;
 }
 
-/* Contenu principal */
+/* Conteneur principal */
 .main-container {
     display: flex;
     margin-top: 80px; /* Compense le header fixe */
-    height: calc(75vh - 80px); /* Ajuste la hauteur pour l'écran visible */
+    height: 55vh; 
     padding-top: 10px;
     gap: 20px;
+    position: relative; /* Nécessaire pour le positionnement absolu des sous-menus */
+    overflow: visible; /* Permet aux éléments enfants de déborder */
 }
 
-/* Alignement et flexibilité */
+/* Articles principaux */
 .articles {
-    z-index: 2; /* Placer les articles au-dessus du canvas */
-    display: flex; /* Passe en flexbox */
-    flex-direction: column; /* Aligne les boutons en colonne */
-    justify-content: center; /* Centre les boutons verticalement */
-    align-items: center; /* Centre les boutons horizontalement */
-    width: 25%; /* Doit correspondre au logo */
-    height: 55vh; /* Utilise toute la hauteur de la fenêtre */
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Aligne les articles en haut */
+    align-items: stretch; /* Les articles occupent toute la largeur */
+    width: 25%; /* Largeur fixe */
+    height: auto; /* S'ajuste à la hauteur du contenu */
     background-color: #2e2e40;
-    padding: 20px;
+    padding: 15px;
     box-sizing: border-box;
-    gap: 15px; /* Espace entre les boutons */
+    gap: 10px; /* Espacement entre les articles */
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Media Queries pour petits écrans */
+/* Articles individuels */
+.article {
+    position: relative; /* Nécessaire pour positionner le sous-menu */
+    list-style: none;
+    width: 100%;
+}
+
+/* Boutons des articles principaux */
+.article > .article-name {
+    background-color: #3a3a4f;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+}
+
+.article > .article-name:hover {
+    background-color: #4a4a6f;
+    transform: scale(1.02);
+}
+
+/* Sous-menu des sous-articles */
+.sub-articles {
+    display: none; /* Cacher par défaut */
+    position: absolute;
+    top: 0; /* Aligne le sous-menu avec le haut de l'article parent */
+    left: calc(100%); /* Le sous-menu est directement collé à droite */
+    background-color: #3a3a4f;
+    border-radius: 6px;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    z-index: 10;
+    flex-direction: column;
+    gap: 8px;
+    width: 200px;
+
+    /* Transition pour un effet subtil */
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Ajouter la zone de grâce pour éviter les trous */
+.article:hover > .sub-articles,
+.sub-articles:hover {
+    display: flex; /* Assure que tout reste visible */
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Sous-articles individuels */
+.sub-articles li {
+    list-style: none;
+    padding: 8px 12px;
+    background-color: #4a4a6f;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.sub-articles li:hover {
+    background-color: #6a6a9f;
+}
+
+/* Ajustements pour éviter les trous */
+.article {
+    margin-bottom: -1px; /* Élimine l'espace entre les articles et le sous-menu */
+}
+
+.sub-articles {
+    margin-top: 0;
+    margin-bottom: 0; /* Assure que tout est bien collé */
+}
+
+/* Responsiveness */
 @media (max-width: 768px) {
-    .article-button {
-        width: 90%; /* Réduit la largeur des boutons sur des écrans moyens */
+    .articles {
+        width: 100%; /* Occupe toute la largeur */
+        padding: 10px;
     }
 
-    .articles {
-        padding: 10px; /* Réduit le padding du conteneur */
+    .sub-articles {
+        left: calc(100% + 5px); /* Toujours à droite avec un léger espace */
+        width: 180px; /* Réduit légèrement la largeur */
     }
 }
 
 @media (max-width: 480px) {
-    .article-button {
-        width: 100%; /* Les boutons occupent toute la largeur */
-        font-size: 14px; /* Réduit légèrement la taille de la police */
+    .article > .article-name {
+        font-size: 14px; /* Texte légèrement plus petit */
+        padding: 10px 15px;
     }
 
-    .articles {
-        padding: 5px; /* Réduction supplémentaire du padding */
-        gap: 10px; /* Réduit l'espacement entre les boutons */
+    .sub-articles {
+        left: calc(100%); /* Alignement parfait même en responsive */
+        width: 160px; /* Réduit encore la largeur */
+    }
+
+    .sub-articles li {
+        font-size: 12px; /* Texte encore plus petit */
     }
 }
+
 
 /* Flexbox container */
 .flexbox-container {
@@ -95,7 +188,7 @@ body.dark-mode {
     justify-content: center;
     align-items: center;
     width: 75%; /* Le reste de l'espace disponible */
-    height: 100%; /* Ajuste la hauteur pour être identique */
+    height: 55vh; /* Utilise toute la hauteur de la fenêtre */
     background-color: #f4f4f9;
     box-sizing: border-box;
 }
@@ -123,8 +216,8 @@ body.dark-mode {
 .logo {
     z-index: 2; /* Placer le logo au-dessus du canvas */
     width: 75%;
-    height: 100%;
-    object-fit: cover; /* Fait en sorte que l'image couvre complètement le conteneur */
+    height: 55vh; 
+       object-fit: cover; /* Fait en sorte que l'image couvre complètement le conteneur */
 }
 
 /* Ajout de Media Queries pour s'assurer que l'image reste bien ajustée */
@@ -175,9 +268,14 @@ body.dark-mode .flexbox-container {
     border-color: rgb(85, 85, 85);
 }
 
+.nouveaute-container{
+    position: relative;
+    z-index: 10;
+}
+
+
 /* Bulle Nouveauté */
 .bulle-nouveaute {
-    z-index: 3; /* Placer au-dessus des autres éléments */
     margin-top: -50px;
     width: 300px;
     height: 80px;

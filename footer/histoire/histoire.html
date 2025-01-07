@@ -10,31 +10,12 @@
   <!-- Conteneur principal -->
   <div class="container">
     <div class="story-card">
-      <h1 id="histoire-titre">Chargement...</h1>
-      <p id="histoire-texte">Chargement...</p>
+      <h1 id="histoire-titre">L'Histoire de Notre Entreprise</h1>
+      <p id="histoire-texte">Notre entreprise a été fondée dans les années 1990 avec pour mission de repousser les limites de l'innovation dans le domaine de la technologie. Depuis ses débuts modestes dans un petit garage jusqu'à devenir l'une des sociétés leaders du secteur, notre parcours est marqué par des défis, des succès et une passion constante pour l'excellence.\n\nNous avons démarré avec un objectif clair : offrir des solutions accessibles et durables pour nos clients. Notre équipe, composée de talents passionnés et déterminés, a contribué à cette aventure avec des valeurs solides : intégrité, innovation et collaboration.\n\nAujourd'hui, notre histoire continue d'écrire de nouvelles pages avec des produits qui transforment la manière dont les gens interagissent avec la technologie. Grâce à nos clients fidèles et nos équipes inspirées, nous avançons vers un avenir prometteur, où chaque défi est une opportunité de créer, d'apprendre et d'évoluer.
+        </p>
     </div>
   </div>
 
   <!-- Script pour charger dynamiquement le contenu JSON -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      fetch('../langue/lang.json')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`Erreur : ${response.status}`);
-          }
-          return response.json();
-        })
-        .then(data => {
-          if (data.fr && data.fr.histoire) {
-            document.getElementById('histoire-titre').textContent = data.fr.histoire.titre;
-            document.getElementById('histoire-texte').textContent = data.fr.histoire.texte;
-          } else {
-            console.error('Données d\'histoire non trouvées');
-          }
-        })
-        .catch(error => console.error('Erreur lors du chargement de l\'histoire :', error));
-    });
-  </script>
 </body>
 </html>

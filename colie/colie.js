@@ -334,3 +334,6 @@ animate();
                 step.classList.add('completed');
             }
         });
+
+
+  

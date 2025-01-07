@@ -71,7 +71,6 @@ function addToCart() {
     alert('Ajout d’un article au panier.');
 }
 
-// Charger les articles depuis le JSON
 function loadArticles(lang) {
     fetch('./langue/lang.json')
         .then(response => response.json())
@@ -81,13 +80,40 @@ function loadArticles(lang) {
                 articlesContainer.innerHTML = '';
 
                 data[lang].articles.forEach(article => {
-                    const button = document.createElement('button');
-                    button.classList.add('article-button');
-                    button.textContent = article.name;
-                    button.addEventListener('click', () => {
-                        alert(`Vous avez sélectionné : ${article.name}`);
-                    });
-                    articlesContainer.appendChild(button);
+                    // Créer un élément <li> pour chaque article principal
+                    const articleItem = document.createElement('li');
+                    articleItem.classList.add('article');
+
+                    // Bouton pour l'article principal
+                    const articleName = document.createElement('button');
+                    articleName.classList.add('article-name');
+                    articleName.textContent = article.name;
+
+                    // Sous-menu pour les sous-articles
+                    const subArticlesList = document.createElement('ul');
+                    subArticlesList.classList.add('sub-articles');
+
+                    // Ajouter les sous-articles
+                    if (article.subArticles) {
+                        article.subArticles.forEach(subArticle => {
+                            const subArticleItem = document.createElement('li');
+                            subArticleItem.textContent = subArticle.name;
+
+                            // Ajouter un événement au clic sur les sous-articles
+                            subArticleItem.addEventListener('click', () => {
+                                alert(`Vous avez sélectionné : ${subArticle.name}`);
+                            });
+
+                            subArticlesList.appendChild(subArticleItem);
+                        });
+                    }
+
+                    // Ajouter les éléments à l'article principal
+                    articleItem.appendChild(articleName);
+                    articleItem.appendChild(subArticlesList);
+
+                    // Ajouter l'article principal à la liste
+                    articlesContainer.appendChild(articleItem);
                 });
             } else {
                 console.error('Aucun article trouvé pour cette langue.');
@@ -95,6 +121,7 @@ function loadArticles(lang) {
         })
         .catch(error => console.error('Erreur lors du chargement des articles:', error));
 }
+
 
 // Charger dynamiquement le footer
 function loadFooter(lang) {
@@ -328,3 +355,4 @@ window.addEventListener("resize", () => {
 });
 
 animate();
+
