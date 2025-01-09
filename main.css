@@ -61,7 +61,7 @@ body.dark-mode {
     align-items: stretch; /* Les articles occupent toute la largeur */
     width: 25%; /* Largeur fixe */
     height: auto; /* S'ajuste à la hauteur du contenu */
-    background-color: #2e2e40;
+    background-color: #000000;
     padding: 15px;
     box-sizing: border-box;
     gap: 10px; /* Espacement entre les articles */
@@ -78,8 +78,8 @@ body.dark-mode {
 
 /* Boutons des articles principaux */
 .article > .article-name {
-    background-color: #3a3a4f;
-    color: white;
+    background-color: #ffffff;
+    color: #000000;
     padding: 12px 20px;
     border: none;
     text-align: left;
@@ -92,7 +92,7 @@ body.dark-mode {
 }
 
 .article > .article-name:hover {
-    background-color: #4a4a6f;
+    background-color: #ffffff;
     transform: scale(1.02);
 }
 
@@ -102,7 +102,7 @@ body.dark-mode {
     position: absolute;
     top: 0; /* Aligne le sous-menu avec le haut de l'article parent */
     left: calc(100%); /* Le sous-menu est directement collé à droite */
-    background-color: #3a3a4f;
+    background-color: #000000;
     border-radius: 6px;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
     padding: 10px;
@@ -129,8 +129,8 @@ body.dark-mode {
 .sub-articles li {
     list-style: none;
     padding: 8px 12px;
-    background-color: #4a4a6f;
-    color: white;
+    background-color: #ffffff;
+    color: #000000;
     cursor: pointer;
     font-size: 14px;
     border-radius: 4px;
@@ -268,9 +268,11 @@ body.dark-mode .flexbox-container {
     border-color: rgb(85, 85, 85);
 }
 
-.nouveaute-container{
+/* Conteneur principal */
+.nouveaute-container {
     position: relative;
     z-index: 10;
+    padding-top: 100px; /* Ajoute de l'espace pour la bulle */
 }
 
 
@@ -326,7 +328,9 @@ body.dark-mode .bulle-nouveaute span {
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    margin-top: 20px; /* Espace entre la bulle et les articles */
 }
+
 
 /* Article individuel */
 .article-item {
