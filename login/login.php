@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Vérification du mot de passe
         if (password_verify($password, $user['password_hash'])) {
             $_SESSION['user_id'] = $user['id']; // Stocke l'ID utilisateur dans la session
-            header("Location: ../main.html"); // Redirection vers la page principale
+            header("Location: ../main.php"); // Redirection vers la page principale
             exit;
         } else {
             $message = "Email ou mot de passe incorrect.";
