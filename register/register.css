@@ -118,3 +118,24 @@ body {
     color: #1e90ff;
     text-decoration: none;
 }
+
+
+
+.error {
+    border: 1px solid red;
+}
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 4px;
+}
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.password-container {
+    position: relative;
+}
